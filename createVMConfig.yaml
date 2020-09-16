@@ -11,7 +11,7 @@ resources:
       autoDelete: true
       initializeParams:
         diskName: disk-learncicd-287805
-        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-10-buster-v20200805
+        sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/debian-9-stretch-v20180105
     networkInterfaces:
     - network:  https://www.googleapis.com/compute/v1/projects/dryicepoc-242713/global/networks/default
       accessConfigs:
