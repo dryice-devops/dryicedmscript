@@ -25,7 +25,7 @@ resources:
           /bin/sleep 60
           yes Y | sudo apt-get install tomcat8
           /bin/sleep 120
-	  sudo wget https://storage.googleapis.com/tutorialstorage/jpetstore.war -P /var/lib/tomcat8/webapps/
+          sudo wget https://storage.googleapis.com/tutorialstorage/jpetstore.war -P /var/lib/tomcat8/webapps/
     tags:
       items:
       - http
