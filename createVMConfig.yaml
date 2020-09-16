@@ -21,7 +21,7 @@ resources:
       items:
       - key: startup-script
         value: |
-          apt-get update
+          sudo apt-get update
           /bin/sleep 60
           yes Y | sudo apt-get install tomcat8
           /bin/sleep 120
