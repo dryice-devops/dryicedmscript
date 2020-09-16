@@ -1,0 +1,52 @@
+resources:
+- name: createfirstvm
+  type: compute.v1.instance
+  properties:
+    zone: us-central1-f
+    machineType: https://www.googleapis.com/compute/v1/projects/learncicd-287805/zones/us-central1-f/machineTypes/n1-standard-4
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        diskName: disk-learncicd-287805
+        sourceImage: https://www.googleapis.com/compute/v1/projects/learncicd-287805/global/images/jenkins-agent-1598599961
+    networkInterfaces:
+    - network:  https://www.googleapis.com/compute/v1/projects/learncicd-287805/global/networks/default
+      accessConfigs:
+      - name: External NAT
+        type: ONE_TO_ONE_NAT
+    metadata:
+      items:
+      - key: startup-script
+        value: |
+          apt-get update
+          /bin/sleep 60
+          yes Y | sudo apt-get install tomcat8
+          /bin/sleep 120
+		  sudo wget https://storage.googleapis.com/tutorialstorage/jpetstore.war -P /var/lib/tomcat8/webapps/
+    tags:
+      items:
+      - http
+    serviceAccounts:
+    - email: jenkins@learncicd-287805.iam.gserviceaccount.com
+      scopes:
+      - https://www.googleapis.com/auth/devstorage.read_only
+      - https://www.googleapis.com/auth/logging.write
+      - https://www.googleapis.com/auth/monitoring.write
+      - https://www.googleapis.com/auth/servicecontrol
+      - https://www.googleapis.com/auth/service.management.readonly
+      - https://www.googleapis.com/auth/trace.append
+- type: compute.v1.firewall
+  name: default-allow-http
+  properties:
+    network: https://www.googleapis.com/compute/v1/projects/learncicd-287805/global/networks/default
+    targetTags: 
+    - http
+    allowed:
+    - IPProtocol: tcp
+      ports: 
+      - '8080'
+    sourceRanges: 
+    - 0.0.0.0/0    

@@ -1,0 +1,15 @@
+imports:
+- path: network.py
+
+resources:
+# The "name" property below will be the name of the new project
+- name: learndmproject-network
+  type: network.py
+  properties:
+    subnetworks:
+      - region: europe-west1
+        cidr: 10.0.0.0/16
+      - region: us-west1
+        cidr: 10.1.0.0/16
+      - region: us-east1
+        cidr: 10.2.0.0/16

@@ -1,0 +1,24 @@
+info:
+  title: Network
+  author: Google, Inc.
+  description: >
+    Creates a single network and its subnetwork
+
+required:
+- subnetworks
+
+properties:
+  subnetworks:
+    type: array
+    description: >
+      An array of subnetworks.
+    item:
+      description: >
+        A subnetwork, defined by its region and its CIDR.
+      type: object
+      properties:
+        region:
+          type: string
+        cidr:
+          type: string
+          pattern: ^([0-9]{1,3}\.){3}[0-9]{1,3}\/[0-9]{1,2}$
